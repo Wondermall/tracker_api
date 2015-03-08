@@ -59,6 +59,15 @@ module TrackerApi
         end
       end
 
+      # Add a new comment to the store, return all comments on the store.
+      #
+      # @param [Hash] params
+      # @return [Array[Comment]]
+      def create_comment(params = {})
+        Endpoints::Comments.new(client).create(project_id, id, params)        
+        @comments = Endpoints::Comments.new(client).get(project_id, id, {})
+      end
+
       # @param [Hash] params
       # @return [Array[Task]]
       def tasks(params = {})
